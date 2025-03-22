@@ -7,10 +7,9 @@ app = Flask(__name__)
 def hello_world():
     return render_template('index.html')
 
-@app.route("/scrape", methods=['POST'])
+@app.route("/scrape", methods=['GET'])
 def scrape():
-    data = request.get_json()
-    url = data.get('url')
+    url = request.args.get('url')
     try:
         if not (url.startswith("http://") or url.startswith("https://")):
             raise ValueError("URL must start with 'http://' or 'https://'")
